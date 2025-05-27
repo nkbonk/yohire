@@ -1,1 +1,7 @@
-Режим вывода команд на экран (ECHO) включен.
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get('/')
+def read_root():
+    return {'message': 'Welcome to Yohire!'}
