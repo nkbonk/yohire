@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:17
+    container_name: yohire_postgres
+    environment:
+      POSTGRES_DB: yohire_db
+      POSTGRES_USER: nkbonk
+      POSTGRES_PASSWORD: 80395742Ks
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: yohire_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+
+  web:
+    build: .
+    container_name: yohire_app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql+psycopg2://nkbonk:80395742Ks@db:5432/yohire_db
+    volumes:
+      - .:/app
+
+  frontend:
+    image: node:18-alpine
+    container_name: yohire_frontend
+    working_dir: /app_front
+    volumes:
+      - ./frontend:/app_front       # монтируем код локально
+      - /app_front/node_modules     # чтобы node_modules не сбивались при монтировании
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - "3000:3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - web
+
+
+
+volumes:
+  postgres_data:
+
