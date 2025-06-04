@@ -1,1 +1,52 @@
-"__pycache__/\n*.pyc\n.env\n.venv\n.idea/\n*.sqlite3" 
+# ======================
+# Общие файлы (Linux/Windows/Mac)
+# ======================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+
+# ======================
+# Python / FastAPI / Alembic
+# ======================
+__pycache__/
+*.py[cod]
+env/
+venv/
+*.sqlite3
+alembic/versions/*.pyc
+*.pyc
+
+# Если есть локальный .env с SECRET_KEY и паролями
+.env
+.env.*.local
+
+# ======================
+# Docker (если есть)
+# ======================
+docker-compose.override.yml
+*.pid
+*.seed
+*.env
+
+# ======================
+# Postgres data volume (если ты не хочешь пушить том)
+# ======================
+postgres_data/
+
+# ======================
+# Frontend / Node.js
+# ======================
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.cache/
+frontend/.local/
+
+# Husky и другие скрытые папки фронта — обычно их не надо игнорить, но если хочешь:
+# frontend/.husky/
+
+# Фронт-скрытые файлы окружения
+frontend/.env
+frontend/.env.local
