@@ -1,0 +1,44 @@
+# ==== FastAPI & HTTP ====
+fastapi==0.115.2              # Основной фреймворк для API
+starlette==0.46.2             # Подкапотный ASGI-фреймворк, используется FastAPI
+uvicorn[standard]==0.34.2     # ASGI-сервер для запуска FastAPI
+# В комплект входят uvicorn[standard] входят:
+# watchgod - Следит за изменениями файлов (reload)
+# httptools	- HTTP-парсер
+# uvloop - event loop
+# websockets - Для поддержки WebSocket
+
+
+# ==== База данных ====
+sqlalchemy==2.0.41            # ORM для работы с PostgreSQL
+asyncpg==0.30.0               # Асинхронный драйвер PostgreSQL
+alembic==1.13.1               # Миграции базы
+
+
+# ==== Pydantic ====
+pydantic==2.11.5              # Валидация и сериализация данных (FastAPI)
+pydantic_core==2.33.2         # Низкоуровневая часть Pydantic
+typing-extensions==4.13.2     # Поддержка новых типов для Pydantic
+typing-inspection==0.4.1      # Для подсмотра за типами (опционально)
+
+
+# ==== Переменные окружения ====
+python-dotenv==1.1.0          # Загрузка переменных из .env
+
+
+# ==== Pre-commit хуки, линтеры и автоформаттеры ====
+flake8==6.1.0                 # Линтер
+black==24.3.0                 # Автоформаттер
+isort==5.12.0                 # Сортировка импортов
+pre-commit==3.7.0             # Хуки git
+
+
+# ==== Опционально (можно закомментить/удалить) ====
+# anyio==4.9.0             # async backend, уже подтягивается через Starlette
+# click==8.2.1             # нужен Black, сам подтянется
+# colorama==0.4.6          # для раскраски логов в терминале
+# greenlet==3.2.2          # нужен SQLAlchemy, подтянется
+# h11==0.16.0              # нужен Uvicorn, подтянется
+# idna==3.10               # часть httpx, у тебя не используется напрямую
+# sniffio==1.3.1           # нужен для async, но подтянется сам
+# annotated-types==0.7.0   # внутренняя зависимость pydantic

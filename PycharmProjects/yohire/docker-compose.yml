@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres:17
+    container_name: yohire_postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+
+  # Пока так полежит, может быть понадобится)
+
+  #pgadmin:
+    #image: dpage/pgadmin4
+    #container_name: yohire_pgadmin
+    #environment:
+      #PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      #PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    #ports:
+      #- "5050:80"
+    #depends_on:
+      #- db
+
+  web:
+    build: .
+    container_name: yohire_app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+    volumes:
+      - .:/app
+
+volumes:
+  postgres_data:

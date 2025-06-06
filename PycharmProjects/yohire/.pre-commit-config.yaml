@@ -1,0 +1,23 @@
+repos:
+                                            # Набор базовых хуков от сообщества pre-commit
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0                             # Указана стабильная версия — фиксирует конкретный набор хуков
+    hooks:
+      - id: trailing-whitespace             # Удаляет лишние пробелы в конце строк
+      - id: end-of-file-fixer               # Убедится, что в конце каждого файла будет ровно одна пустая строка
+      - id: check-yaml                      # Проверяет YAML-файлы на валидность (например, отступы, синтаксис)
+      - id: check-added-large-files         # Предотвращает случайное добавление больших файлов (например, >500кб)
+
+                                            # Автоформатер Python-кода от Python Software Foundation
+  - repo: https://github.com/psf/black
+    rev: 23.7.0                             # Версия black — конкретная, чтобы избежать изменений в будущем
+    hooks:
+      - id: black
+        args: [--line-length=88]            # Настройка максимальной длины строки (рекомендуется PEP8 — 88)
+
+                                            # Сортировка импортов по правилам black
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.12.0                             # Версия isort — стабильная
+    hooks:
+      - id: isort
+        args: ["--profile", "black"]        # Настроен под стиль black, чтобы оба форматера не конфликтовали
